@@ -1,0 +1,45 @@
+{
+  "name": "indicadoressennova",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "apexcharts": "^3.22.3",
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.16.0",
+    "chart.js": "^2.9.4",
+    "core-js": "^3.6.5",
+    "moment": "^2.29.1",
+    "register-service-worker": "^1.7.1",
+    "secure-ls": "^1.2.6",
+    "vue": "^2.6.12",
+    "vue-axios": "^2.1.5",
+    "vue-router": "^3.2.0",
+    "vue-sweetalert2": "^4.1.1",
+    "vuescroll": "^4.16.1",
+    "vuetify": "^2.2.11",
+    "vuex": "^3.4.0",
+    "vuex-persistedstate": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-vuetify": "^2.0.7",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.3.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
