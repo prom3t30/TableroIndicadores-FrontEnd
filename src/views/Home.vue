@@ -1,12 +1,11 @@
 <template>
-  <v-app>
-    <MenuSuperior></MenuSuperior>
-    <v-main>
-      <Menu></Menu>
-      
-    </v-main>
-      <Footer></Footer>
-  </v-app>
+    <v-app>
+        <MenuSuperior></MenuSuperior>
+        <v-main>
+            <Menu></Menu>
+        </v-main>
+        <Footer></Footer>
+    </v-app>
 </template>
 
 <script>
@@ -15,26 +14,26 @@ import MenuSuperior from '../components/MenuSuperior'
 import Dashboard from '../components/Dashboard'
 import Footer from '../Footer'
 
-
-
 export default {
-  name: 'Home',
-  components: {
-   Menu, Dashboard, MenuSuperior, Footer 
-  },
+    name: 'Home',
+    components: {
+        Menu,
+        Dashboard,
+        MenuSuperior,
+        Footer,
+    },
 
-  data: () => ({
-    //
-  }),
-  methods:{
-
-  }
-};
+    data: () => ({
+        //
+    }),
+    methods: {},
+}
 </script>
 <style scoped>
-  .color-sena{
+.color-sena {
     background-color: #fb8c00 !important;
-    
-  }
-  .color-texto-sena{color:white;}
+}
+.color-texto-sena {
+    color: white;
+}
 </style>

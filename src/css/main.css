@@ -3,38 +3,45 @@ Not supports in Firefox and IE */
 
 /* total width */
 ::-webkit-scrollbar {
-    background-color:#fff;
-    width:8px
+    background-color: #fff;
+    width: 8px;
 }
 
 /* background of the scrollbar except button or resizer */
 ::-webkit-scrollbar-track {
-    background-color:orange
+    background-color: orange;
 }
 ::-webkit-scrollbar-track:hover {
-    background-color:#f4f4f4
+    background-color: #f4f4f4;
 }
 
 /* scrollbar itself */
 ::-webkit-scrollbar-thumb {
-    background-color:orange;
-    border-radius:8px;
-    border:1px solid #fff
+    background-color: orange;
+    border-radius: 8px;
+    border: 1px solid #fff;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color:orange;
-    border:1px solid #f4f4f4
+    background-color: orange;
+    border: 1px solid #f4f4f4;
 }
 
 /* set button(top and bottom of the scrollbar) */
-::-webkit-scrollbar-button {display:none}
+::-webkit-scrollbar-button {
+    display: none;
+}
 
 /* div box */
-body{background-color:orange}
+body {
+    background-color: orange;
+}
 .scrollbar {
     height: 75vh;
     width: 25vw;
     min-width: 150px;
     background: #fff;
-    overflow-y: scroll}
-.overflow{min-height: 100vh}
+    overflow-y: scroll;
+}
+.overflow {
+    min-height: 100vh;
+}

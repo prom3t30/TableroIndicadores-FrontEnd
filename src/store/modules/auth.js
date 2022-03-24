@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { LayoutPlugin } from 'bootstrap-vue';
+import { LayoutPlugin } from 'bootstrap-vue'
 
 export default {
     namespaced: true,
@@ -12,12 +12,12 @@ export default {
             stateTrue: false,
             token: null,
             nombre: '',
-            centro: ''
-        }
+            centro: '',
+        },
     },
     mutations: {
         setUserProfile(state, val) {
-            state.userProfile = val;
+            state.userProfile = val
         },
         singOff(state) {
             state.userProfile = {}
@@ -38,54 +38,50 @@ export default {
             state.sesion.centro = value.data.data.codigoCentro
         },
         permits(state, value) {
-            state.sesion.privi = value.data;
-        }
+            state.sesion.privi = value.data
+        },
     },
     getters: {
-
-        userProfile: state => {
+        userProfile: (state) => {
             return state.userProfile
         },
-        dataSession: state => {
+        dataSession: (state) => {
             return state.sesion
-        }
+        },
     },
     actions: {
         login(state, data) {
             //
-            var rutaPermits = this._vm.$api + this._vm.$roles + '/' + this._vm.$privilegios + '/';
-            var rol = '';
-            axios.post(this._vm.$api + this._vm.$auth, data)
-                .then(response => {
-                    state.commit('setUserProfile', data);
-                    state.commit('interLogin', response);
-                    rol = response.data.data.rol_id;
-                    rutaPermits += rol;
+            var rutaPermits = this._vm.$api + this._vm.$roles + '/' + this._vm.$privilegios + '/'
+            var rol = ''
+            axios
+                .post(this._vm.$api + this._vm.$auth, data)
+                .then((response) => {
+                    state.commit('setUserProfile', data)
+                    state.commit('interLogin', response)
+                    rol = response.data.data.rol_id
+                    rutaPermits += rol
                 })
-                .catch(err => {
+                .catch((err) => {
                     alert('La contraseña y/o cuenta de correo electronico son incorrectos')
-
-                }).then(function () {
-                    axios.get(rutaPermits)
-                        .then(res => {
+                })
+                .then(function () {
+                    axios
+                        .get(rutaPermits)
+                        .then((res) => {
                             state.commit('permits', res)
-                            window.location.reload();
+                            window.location.reload()
                         })
-                        .catch(err => {
-                            console.error(err);
+                        .catch((err) => {
+                            console.error(err)
                         })
-                });
-
+                })
         },
         logOut(state) {
-            axios
-                .get(this._vm.$api + this._vm.$logOut)
-                .then(response => {
-                    state.commit('singOff')
-                    window.location.reload();
-                })
-
-        }
-    }
-
+            axios.get(this._vm.$api + this._vm.$logOut).then((response) => {
+                state.commit('singOff')
+                window.location.reload()
+            })
+        },
+    },
 }
