@@ -53,6 +53,7 @@ export default {
         login(state, data) {
             //
             var rutaPermits = this._vm.$api + this._vm.$roles + '/' + this._vm.$privilegios + '/'
+            // "var rutaPermits es esto -> http://localhost:8000/api/roles/privilegios/
             var rol = ''
             axios
                 .post(this._vm.$api + this._vm.$auth, data)

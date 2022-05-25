@@ -270,6 +270,7 @@ export default {
         },
         changedValueRolSeleccionado: function (value) {
             this.rolFiltrado = value
+            console.log(value);
             this.parametros = []
             axios.get(this.$api + this.$usuarios + '/getbyrolyaplicacion/' + value).then((response) => {
                 for (var i = 0; i < response.data.data.length; i++) {
@@ -400,7 +401,7 @@ export default {
             var name = this.editedItem.nombre
             var email = this.editedItem.email
             const centro = this.editedItem.centro
-
+            console.log(this.editedItem.rol);
             if (name.length > 0) {
                 if (name.length > 0) {
                     if (!name.includes('0') && !name.includes('1') && !name.includes('2') && !name.includes('3') && !name.includes('4') && !name.includes('5') && !name.includes('6') && !name.includes('7') && !name.includes('8') && !name.includes('9')) {
@@ -453,6 +454,7 @@ export default {
                                         }).then((result) => {
                                             if (result.isConfirmed) {
                                                 this.dialogLoading = true
+                                                console.log(this.editedItem);
                                                 axios
                                                     .post(this.$api + this.$usuarios, this.editedItem)
                                                     .then((response) => {

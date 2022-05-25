@@ -24,7 +24,7 @@ import './css/main.css'
 Vue.config.productionTip = false
 
 //variables de api
-Vue.prototype.$api = 'http://127.0.0.1:8000/api/'
+Vue.prototype.$api = 'http://localhost:8000/api/'
 Vue.prototype.$aplicaciones = 'aplicaciones'
 Vue.prototype.$categorias = 'categorias'
 Vue.prototype.$pantallas = 'pantallas'
@@ -34,6 +34,10 @@ Vue.prototype.$roles = 'roles'
 Vue.prototype.$usuarios = 'usuarios'
 Vue.prototype.$auth = 'auth'
 Vue.prototype.$centros = 'centros'
+
+//prueba subdirector
+Vue.prototype.$subdirector = 'subdirector'
+
 Vue.prototype.$unidad = 'unidad'
 Vue.prototype.$clasificacion = 'clasificacion'
 Vue.prototype.$cliente = 'cliente'

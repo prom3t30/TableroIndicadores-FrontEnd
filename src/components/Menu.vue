@@ -10,6 +10,7 @@
                     <v-list-item-content>
                         <v-list-item-title>{{ nombre }}</v-list-item-title>
                         <v-list-item-subtitle>{{ nameRol }}</v-list-item-subtitle>
+
                     </v-list-item-content>
                 </v-list-item>
 
@@ -32,6 +33,15 @@
                         <v-list-item-title>Parametrización</v-list-item-title>
                     </template>
 
+                    <v-list-item v-if="screen.EJESUBDIRECTOR.ver" :to="{ name: 'Subdirector' }">
+                        <v-list-item-icon>
+                            <v-icon>mdi-school</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-content>
+                            <v-list-item-title>Eje Subdirector</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+
                     <v-list-item v-if="screen.CATEGORIAS.ver" :to="{ name: 'Categorias' }">
                         <v-list-item-icon>
                             <v-icon>mdi-school</v-icon>
@@ -40,6 +50,7 @@
                             <v-list-item-title>Categorias</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+
                     <v-list-item v-if="screen.CENTROS.ver" :to="{ name: 'Centros' }">
                         <v-list-item-icon>
                             <v-icon>mdi-home-modern</v-icon>
@@ -48,6 +59,7 @@
                             <v-list-item-title>Centros</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
+
                     <v-list-item v-if="screen.CLASIFICACION.ver" :to="{ name: 'Clasificacion' }">
                         <v-list-item-icon>
                             <v-icon>mdi-account-switch</v-icon>

@@ -33,6 +33,11 @@ const routes = [
         name: 'Centros',
         component: () => import('../components/parametrizacion/Centro.vue'),
     },
+        {
+        path: '/subdirector',
+        name: 'Subdirector',
+        component: () => import('../components/parametrizacion/Subdirector.vue'),
+    },
     {
         path: '/roles',
         name: 'Roles',

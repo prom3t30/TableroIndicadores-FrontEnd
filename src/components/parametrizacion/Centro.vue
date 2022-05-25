@@ -156,6 +156,7 @@ export default {
         if (this.logged) {
             if (this.estado) {
                 if (this.aplications.PARAMETRIZACION && this.screen.CENTROS.ver) {
+                    // esto es this.aplications.PARAMETRIZACIONtrue----Esto es  this.screen.CENTROS.ver --> true
                     this.initialize()
                     axios
                         .get(this.$api + this.$usuarios + '/getUsersManagerCentro')
