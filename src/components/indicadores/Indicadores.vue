@@ -2,6 +2,51 @@
     <div v-once v-if="aplications.CONFIGURACION && screen.ADMININDICADORES.ver">
         <v-data-table :headers="headers" :items="parametros" :search="search" sort-by="valor" class="elevation-1">
             <template v-slot:top>
+                <!--MI MODAL-->
+                <b-modal ref="my-modal" hide-footer title="Editar Meta" size="lg" body-bg-variant="warning" header-bg-variant="warning" header-text-variant="light">
+                    <v-card>
+                        <!--                         <v-card-title class="warning" style="color: black">
+                            <span class="headline">Editar Meta</span>
+                        </v-card-title> -->
+                        <v-card-text>
+                            <v-container>
+                                <v-row style="display: none">
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editarMetaLinCentro.idmeta" type="text" label="id" disabled> </v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row style="display: none">
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editarMetaLinCentro.centro_id" type="text" label="ID DEL CENTRO" disabled> </v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editarMetaLinCentro.Nombre" type="text" label="Nombre del centro" disabled></v-text-field>
+                                    </v-col>
+                                </v-row>
+
+                                <v-row style="display: none">
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editarMetaLinCentro.metaxlinea" type="text" label="Meta de la linea programatica" disabled></v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field v-model="editarMetaLinCentro.metaCentro" type="number" label="Meta del centro" required></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn style="background-color: #fb8c00" text @click="hideModal">Cancelar</v-btn>
+                            <v-btn style="background-color: #4caf50" @click="editMetLinea">Guardar</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </b-modal>
+                <!--MI MODAL-->
+
                 <!--INICIO DIALOGO DE LOADING-->
                 <v-overlay :value="dialogLoading"></v-overlay>
                 <v-dialog v-model="dialogLoading" hide-overlay persistent width="300">
@@ -115,13 +160,14 @@
                                     </v-col>
                                 </v-row>
                                 <v-row class="mb-0 p-0">
-                                    <v-col cols="6">
+                                    <v-col cols="4">
                                         <h5 class="p-0">Línea Programática</h5>
                                     </v-col>
-                                    <v-col cols="2">
-                                        <h5 class="p-0">Meta Por Linea</h5>
+                                    <v-col cols="4">
+                                        <h5 class="">Meta Por Linea <span style="margin-left: 48px"></span>Meta Por centro</h5>
                                     </v-col>
                                 </v-row>
+
                                 <v-row v-for="lineaProgramatica of lineaProgramaticas" :key="lineaProgramatica.id">
                                     <v-col cols="12" class="d-flex align-content-center mb-0 mt-0 p-0">
                                         <v-col cols="4">
@@ -131,16 +177,17 @@
                                             <input v-model.number="lineaProgramatica.metaxlinea" type="number" single-line hide-details class="d-flex align-content-center p-0" />
                                         </v-col>
                                         <v-col cols="2" class="d-flex align-content-center flex-wrap">
-                                            <v-dialog v-model="dialogCentroxlinea" :retain-focus="false" persistent max-width="600px">
+                                            <v-dialog v-model="dialogCentroxlinea" :retain-focus="false" persistent max-width="1300px">
                                                 <template v-slot:activator="{ on, attrs }">
                                                     <v-btn :class="lineaProgramatica.metaxlinea > 0 ? '' : 'v-btn--disabled'" color="primary" dark v-bind="attrs" v-on="on" @click="getCentros(lineaProgramatica)">
+                                                        <span>acaaa</span>
                                                         <v-icon>mdi-office-building-outline</v-icon>
                                                     </v-btn>
                                                 </template>
 
                                                 <v-card>
                                                     <v-card-title class="warning" style="color: white">
-                                                        <span class="headline">Meta por centro - {{ lineaSelected.linea }}</span>
+                                                        <span class="headline">Meta por centro - {{ lineaSelected.linea }} </span>
                                                     </v-card-title>
                                                     <v-card-text>
                                                         <v-container>
@@ -178,6 +225,34 @@
                                                                     </v-tooltip>
                                                                 </v-col>
                                                             </v-row>
+
+                                                            <!-- mi tabla de prueba  -->
+                                                            <v-row>
+                                                                <table class="table table-striped table-hover sticky-header">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th style="display: none">ID</th>
+                                                                            <th>Centro de formación</th>
+                                                                            <th>Meta</th>
+                                                                            <th>Editar</th>
+                                                                            <!-- <th>Borrar</th> -->
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr v-for="item in List" :key="item.id">
+                                                                            <th style="display: none">{{ item.id }}</th>
+                                                                            <th>{{ item.Nombre }}</th>
+                                                                            <th>{{ item.metaCentro }}</th>
+                                                                            <th>
+                                                                                <button color="indigo" id="show-btn" @click="showModal(item)" class="btn-warning">
+                                                                                    <v-icon>mdi-pencil</v-icon>
+                                                                                </button>
+                                                                            </th>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </v-row>
+                                                            <!-- mi tabla de prueba  -->
                                                         </v-container>
                                                     </v-card-text>
                                                     <v-card-actions>
@@ -451,6 +526,11 @@ export default {
             metaGlobal: 0,
             user: null,
         },
+        //objeto que almacena los datos que pasamos del boton editar
+        editarMetaLinCentro: { Nombre: '', metaCentro: '', idmeta: '', centro_id: '' },
+        //id para editar  datos que pasamos del boton editar
+        idmetacentro: '',
+
         globalMeta: [],
         nowYear: false,
         years: [],
@@ -484,6 +564,7 @@ export default {
             mporcentro: [{ centro: '', metaCentro: '' }],
             usuarioCreacion: null,
             metaxLinea_id: null,
+            metaxlinea: null,
         },
         lineaSelected: {},
         indicador_id: '',
@@ -501,6 +582,15 @@ export default {
             { text: 'Estado', value: 'estado' },
             { text: 'Acciones', value: 'actions', sortable: false },
         ],
+        /*
+        metasxLinProgramatica: '',
+        metasxLinProgramaticas: [], */
+
+        // objeto que recibe los valores de la consulta para mostrar
+        // las metas por centro
+        List: [],
+        List2: [],
+
         categorias: [],
         categoriaSeleccionada: null,
 
@@ -628,7 +718,6 @@ export default {
                             })
                         }
                     })
-
                     axios.get(this.$api + this.$unidad).then((response) => {
                         this.unidad = []
                         for (var item in response.data.data) {
@@ -648,6 +737,7 @@ export default {
                     this.getCategorias()
                     this.getClasificacion()
                     this.getCliente()
+                    //this.getMetaLineaCentros()
                 }
             }
         } else {
@@ -714,20 +804,73 @@ export default {
                 return 'La meta sobrepasa la actual'
             }
         },
+        // muestra el modal editar la meta de la linea del centro
+        showModal(item) {
+            this.editarMetaLinCentro = { Nombre: item.Nombre, metaCentro: item.metaCentro, idmeta: item.id, centro_id: item.centro_id }
+            this.idmetacentro = item.id
+            this.$refs['my-modal'].show()
+        },
+        // oculta el modal editar la meta de la linea del centro
+        hideModal() {
+            this.$refs['my-modal'].hide()
+        },
+        // edita la meta de la linea del centro
+        editMetLinea() {
+            const longitud = this.editarMetaLinCentro.metaxlinea
+            console.log('longitud-> ' + longitud)
+            axios
+                .put(this.$api + this.$metalineacentro, this.editarMetaLinCentro)
+                .then((res) => {
+                    // oculta el modal editar la meta de la linea del centro
+                    this.hideModal()
+                    //this.$refs['my-modal'].hide()
+                    this.$swal({
+                        icon: 'success',
+                        title: 'Actualización Exitosa',
+                        confirmButtonColor: '#fb8c00',
+                    })
+                    this.message = 'actualizado'
+                    this.alert = true
+                    //llamamos la funcion getMetaLineaCentros para actualizar la tabla con los cambios realizados
+                    this.getMetaLineaCentros()
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        },
+
         saveMetaLineaCentro(metaSelecionanda) {
+            console.log(this.$api + this.$metalineacentro, this.MetaCentros)
             this.dialogoCargando = true
             const m = this.MetaCentros.mporcentro
+            console.log('valor de la m ->' + m)
             const meta = metaSelecionanda.metaxlinea //50
+            console.log('valor de la meta ->' + meta)
+
             var total = 0
             for (const i in m) {
                 total += Number(m[i].metaCentro)
+                console.log('total ->' + total)
             }
+
             if (total <= meta && total > 0) {
+                console.log('Total final ->' + total)
                 this.MetaCentros.usuarioCreacion = this.user
+                this.MetaCentros.metaxlinea = meta
+                console.log('meta total ->' + this.MetaCentros.metaxlinea)
+
                 axios
                     .post(this.$api + this.$metalineacentro, this.MetaCentros)
                     .then((res) => {
                         console.log(res)
+
+                        /*                        var re2 = res.data[1][0]['metaCentro']
+                        console.log("por finnnn" + re2)
+
+
+                        var res = res.data[1]
+                        this.List = res
+ */
                         this.dialogLoading = false
                         this.$swal({
                             icon: 'success',
@@ -736,6 +879,8 @@ export default {
                         })
                         this.message = 'La meta del centro(s) actualizado(s)'
                         this.alert = true
+
+                        //this.getMetaLineaCentros()
                     })
                     .catch((err) => {
                         console.error(err)
@@ -1036,7 +1181,7 @@ export default {
             var idIndicador = this.indicador_id
             this.rowForChange.usuarioModificacion = this.user
             this.rowForChange.estado = this.rowForChange.estado === 'Activo' ? 1 : 0
-
+            console.log('Mando esto ->' + this.rowForChange)
             axios
                 .put(this.$api + this.$indicadores, this.rowForChange)
                 .then((response) => {
@@ -1079,6 +1224,7 @@ export default {
         },
 
         getIndicadores(year) {
+            console.log(this.$api + this.$indicadorMetaAno + '/getIndicadoresYears/' + year)
             this.parametros = []
             axios.get(this.$api + this.$indicadorMetaAno + '/getIndicadoresYears/' + year).then((response) => {
                 for (let index = 0; index < response.data.indicadores.length; index++) {
@@ -1340,10 +1486,34 @@ export default {
                 this.dialogLoading = false
             })
         },
+        //------------------------------------------------------------------------------//
+        // metodo para optener las metas por linea centro
+        getMetaLineaCentros() {
+            this.MetaCentros.metaxLinea_id
+            //console.log("id linea -> " + this.MetaCentros.metaxLinea_id)
+            axios.get(this.$api + 'metalineacentro', this.MetaCentros.metaxLinea_id).then((response) => {
+                // cuando los datos del controlador se envian por medio de la funcion collection se reciben en dos veces data
+                //  var res = response.data.data
+
+                console.log('ultima respuesta -> ' + response)
+                //var res1 = response.data[1]
+
+                var res = response.data[0]
+                //console.log('llegaaaaa -> ' + res1)
+
+                this.List = res
+                //console.log('llegaron datos con éxito')
+            })
+        },
+        //------------------------------------------------------------------------------//
+
         getCentros(lineaProgramatica) {
             this.MetaCentros.metaxLinea_id = lineaProgramatica.value
+            console.log('estooooooooo  this.MetaCentros.metaxLinea_id = lineaProgramatica.value -> ' + this.MetaCentros.metaxLinea_id)
             this.lineaSelected = lineaProgramatica
+            //console.log('this.lineaSelected = lineaProgramatica  ->' + this.lineaSelected)
             this.ves = 0
+            //console.log("api -> " + this.$api + this.$centros);
             axios
                 .get(this.$api + this.$centros)
                 .then((response) => {
@@ -1358,6 +1528,7 @@ export default {
                     }
                     this.centros = centros
                     this.centrosBackup = centros
+                    this.getMetaLineaCentros()
                 })
                 .catch((error) => {
                     console.log(error)

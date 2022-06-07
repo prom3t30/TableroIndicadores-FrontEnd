@@ -488,6 +488,7 @@ export default {
     },
     methods: {
         async getproyectosCentro(centro) {
+            console.log(this.$api + this.$proyectoevaluarCentro + '/' + centro);
             try {
                 this.dialogLoading = true
                 await axios

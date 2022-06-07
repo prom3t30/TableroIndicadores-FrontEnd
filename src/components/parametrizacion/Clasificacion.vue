@@ -179,6 +179,7 @@ export default {
                 .then((response) => {
                     this.parametros = response.data.data
                     this.dialogLoading = false
+                    console.log("aqui->" + response.data.data);
                 })
                 .catch((erro) => {
                     console.err(erro)

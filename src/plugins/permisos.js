@@ -37,6 +37,12 @@ export default {
                             EDITAR: false,
                             ELIMINAR: false,
                         },
+                        EJESUBDIRECTOR: {
+                            ver: false,
+                            CREAR: false,
+                            EDITAR: false,
+                            ELIMINAR: false,
+                        },
                         CLASIFICACION: {
                             ver: false,
                             CREAR: false,
