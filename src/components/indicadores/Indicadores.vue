@@ -590,7 +590,6 @@ export default {
         // las metas por centro
         List: [],
         List2: [],
-
         categorias: [],
         categoriaSeleccionada: null,
 
@@ -864,7 +863,10 @@ export default {
                     .then((res) => {
                         console.log(res)
 
+                        //var re2 = res.data[1][0]['metaCentro']
+
                         /*                        var re2 = res.data[1][0]['metaCentro']
+
                         console.log("por finnnn" + re2)
 
 
@@ -1182,6 +1184,7 @@ export default {
             this.rowForChange.usuarioModificacion = this.user
             this.rowForChange.estado = this.rowForChange.estado === 'Activo' ? 1 : 0
             console.log('Mando esto ->' + this.rowForChange)
+
             axios
                 .put(this.$api + this.$indicadores, this.rowForChange)
                 .then((response) => {
